@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>MEMORYBOX QR Generator</title>
+  <title>LXPIX QR Generator</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MemoryBox - Photo Booth QR Code Generator">
+  <meta name="description" content="LXPIX - Photo Booth QR Code Generator">
   <meta name="author" content="Sean Ngo">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -17,22 +17,22 @@
 $email = $_POST["email"];
 $cc = $_POST["cc"];
 $session = $_POST["session"];
-$guestname = $_POST["guestname"]; // Added to get guest name
+$s1 = $_POST["s1"]; // Added to get guest name
 $script = $_SERVER["SCRIPT_NAME"];
 
-if (strlen($email) > 3 && strlen($guestname) > 0) {
+if (strlen($email) > 3 && strlen($s1) > 0) {
   // display QR code
-  $info = 'Email address: ' . $email;
+  $info = 'Email address: ' . $email . '<br>';
   $email = '&autoemail=' . urlencode($email);
-  $info = 'Guest Name: ' . $guestname . '<br>';  
-  $guestname = '&guestname=' . urlencode($guestname);
-$info .= '<br>Session type: ' . $session;
+  $info .= 'Guest Name: ' . $s1 . '<br>';  
+  $s1 = '&s1=' . urlencode($s1);
+  $info .= '<br>Session type: ' . $session;
   if ($session == "photo") {
     $cmd = 'c1=' . urlencode('Select photobooth+start') . '&c2=' . urlencode('switchToStillsAndStart');
   } else {
     $cmd = 'c1=' . urlencode('Select video booth+start') . '&c2=' .urlencode('switchToGifAndStart');
   }
-  $url = urlencode("https://contactlessbooth.com$script?$cmd$email$guestname");
+  $url = urlencode("https://contactlessbooth.com$script?$cmd$email$s1");
 
 
   echo <<<QR
@@ -54,8 +54,8 @@ QR;
     <input type="email" class="form-control" placeholder="Enter email" id="email" name="email" required pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
   </div> 
  <div class="form-group">
-    <label for="guestname">Guest name:</label>
-    <input type="text" class="form-control" placeholder="Enter guest name" id="guestname" name="guestname">
+    <label for="s1">Guest name:</label>
+    <input type="text" class="form-control" placeholder="Enter name - no spaces" id="s1" name="s1">
   </div>
  
   <div class="form-check">
@@ -75,7 +75,7 @@ FORM;
 ?>
   <hr class="featurette-divider">
   <footer>
-    <p>&copy; 2023 MemoryBox</p>
+    <p>&copy; 2023 LXPIX.COM</p>
   </footer>
   </div>
 </body>
