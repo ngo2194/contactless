@@ -15,11 +15,10 @@
 <?php
 // read POST parameters
 $email = $_POST["email"];
-$cc = $_POST["cc"];
 $session = $_POST["session"];
 $s1 = $_POST["s1"];
-$number = $_POST["number"]; // Added to get number
-$position = $_POST["position"]; // Added to get position
+$number = $_POST["s2"]; // Added to get number
+$position = $_POST["s3"]; // Added to get position
 $script = $_SERVER["SCRIPT_NAME"];
 
 if (strlen($email) > 3 && strlen($s1) > 0) {
@@ -28,10 +27,10 @@ if (strlen($email) > 3 && strlen($s1) > 0) {
   $email = '&autoemail=' . urlencode($email);
   $info .= 'Guest Name: ' . $s1 . '<br>';  
   $s1 = '&s1=' . urlencode($s1);
-  $info .= 'Number: ' . $s2 . '<br>';
-  $s2 = '&s2=' . urlencode($s2);
-  $info .= 'Position: ' . $s3 . '<br>';
-  $s3 = '&s3=' . urlencode($s3);
+  $info .= 'Number: ' . $number . '<br>';
+  $s2 = '&s2=' . urlencode($number);
+  $info .= 'Position: ' . $position . '<br>';
+  $s3 = '&s3=' . urlencode($position);
   $info .= '<br>Session type: ' . $session;
   if ($session == "photo") {
     $cmd = 'c1=' . urlencode('Select photobooth+start') . '&c2=' . urlencode('switchToStillsAndStart');
@@ -52,7 +51,7 @@ QR;
 } else {
   // display form asking for email address and session type
   echo <<<FORM
-<h3>Photo Booth QR Code Generator</h3>
+<h3>Photo Booth QR Code Generator</h3>So 
 <form action="$script" method="post">
   <div class="form-group">
     <label for="email">Email address:</label>
@@ -64,7 +63,7 @@ QR;
   </div>
   <div class="form-group">
     <label for="s2">Number:</label>
-    <input type="number" class="form-control" placeholder="Enter number" id="s2" name="s2">
+    <input type="text" class="form-control" placeholder="Enter number" id="s2" name="s2">
   </div>
   <div class="form-group">
     <label for="s3">Position:</label>
