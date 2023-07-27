@@ -37,7 +37,7 @@ if (strlen($email) > 3 && strlen($s1) > 0) {
   } else {
     $cmd = 'c1=' . urlencode('Select video booth+start') . '&c2=' .urlencode('switchToGifAndStart');
   }
-  $url = urlencode("https://contactlessbooth.com$script?$cmd$email$s1$s2$s3");
+  $url = urlencode("https://contactlessbooth.com$script?$cmd$s1$s2$s3");
 
   echo <<<QR
 <div>
@@ -51,7 +51,7 @@ QR;
 } else {
   // display form asking for email address and session type
   echo <<<FORM
-<h3>Photo Booth QR Code Generator</h3>So 
+<h3>Photo Booth QR Code Generator</h3> 
 <form action="$script" method="post">
   <div class="form-group">
     <label for="email">Email address:</label>
